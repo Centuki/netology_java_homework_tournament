@@ -98,7 +98,11 @@ public class GameTest {
         List<Player> expected = Arrays.asList(player1, player2, player3, player4, player5);
         List<Player> actual = tournament.getPlayers();
 
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertTrue(actual.contains(player1));
+        Assertions.assertTrue(actual.contains(player2));
+        Assertions.assertTrue(actual.contains(player3));
+        Assertions.assertTrue(actual.contains(player4));
+        Assertions.assertTrue(actual.contains(player5));
     }
 
     @Test
@@ -120,8 +124,21 @@ public class GameTest {
     public void shouldGetPlayerId() {
         Player player1 = new Player(1, "Иван", 85);
 
-        int actual = player1.getId();
         int expected = 1;
+        int actual = player1.getId();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldFindPlayerByName() {
+        Game tournament = new Game();
+        Player player1 = new Player(1, "Иван", 85);
+
+        tournament.register(player1);
+
+        Player expected = tournament.getPlayerByName("Иван");
+        Player actual = player1;
 
         Assertions.assertEquals(expected, actual);
     }

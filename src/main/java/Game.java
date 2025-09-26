@@ -1,30 +1,25 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Game {
-    private List<Player> players = new ArrayList<>();
+    private Map<String, Player> players = new HashMap<>();
 
     //Регистрация
     public void register(Player player) {
-        if (!players.contains(player)) {
-            players.add(player);
-        }
+        players.put(player.getName(), player);
     }
 
     //Поиск игрока
-    private Player findByName(String name) {
-        for (Player player : players) {
-            if (player.getName().equals(name)) {
-                return player;
-            }
-        }
-        return null;
+    public Player getPlayerByName(String name) {
+        return players.get(name);
     }
 
     //Раунд
     public int round(String playerName1, String playerName2) {
-        Player player1 = findByName(playerName1);
-        Player player2 = findByName(playerName2);
+        Player player1 = players.get(playerName1);
+        Player player2 = players.get(playerName2);
 
         //Проверка регистрации
         if (player1 == null) {
@@ -46,6 +41,6 @@ public class Game {
 
     //Метод получения списка игроков
     public List<Player> getPlayers() {
-        return new ArrayList<>(players);
+        return new ArrayList<>(players.values());
     }
 }
